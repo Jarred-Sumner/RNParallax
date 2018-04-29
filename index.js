@@ -281,7 +281,7 @@ class RNParallax extends Component {
   }
 
   renderScrollView() {
-    const { renderContent, scrollEventThrottle, style } = this.props;
+    const { renderContent, scrollEventThrottle, style, AnimatedComponent } = this.props;
 
     return (
       <AnimatedComponent
