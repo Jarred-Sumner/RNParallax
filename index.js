@@ -281,18 +281,18 @@ class RNParallax extends Component {
   }
 
   renderScrollView() {
-    const { renderContent, scrollEventThrottle } = this.props;
+    const { renderContent, scrollEventThrottle, style } = this.props;
 
     return (
-      <Animated.ScrollView
-        style={styles.scrollView}
+      <AnimatedComponent
+        style={StyleSheet.flatten([styles.scrollView, style])}
         scrollEventThrottle={scrollEventThrottle}
-        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }])}
+        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY } }, useNativeDriver: true }])}
       >
         <View style={{ marginTop: this.getHeaderMaxHeight() }}>
           {renderContent()}
         </View>
-      </Animated.ScrollView>
+      </AnimatedComponent>
     );
   }
 
@@ -336,6 +336,7 @@ RNParallax.defaultProps = {
   scrollEventThrottle: SCROLL_EVENT_THROTTLE,
   extraScrollHeight: DEFAULT_EXTRA_SCROLL_HEIGHT,
   backgroundImageScale: DEFAULT_BACKGROUND_IMAGE_SCALE,
+  AnimatedComponent: Animated.ScrollView
 };
 
 export default RNParallax;
